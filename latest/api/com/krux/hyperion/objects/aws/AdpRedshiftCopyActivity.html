@@ -1,0 +1,673 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>AdpRedshiftCopyActivity - com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity</title>
+          <meta name="description" content="AdpRedshiftCopyActivity - com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity" />
+          <meta name="keywords" content="AdpRedshiftCopyActivity com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../../index.html';
+            var hash = 'com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../../../../../lib/class_big.png" />
+        <p id="owner"><a href="../../../../package.html" class="extype" name="com">com</a>.<a href="../../../package.html" class="extype" name="com.krux">krux</a>.<a href="../../package.html" class="extype" name="com.krux.hyperion">hyperion</a>.<a href="../package.html" class="extype" name="com.krux.hyperion.objects">objects</a>.<a href="package.html" class="extype" name="com.krux.hyperion.objects.aws">aws</a></p>
+        <h1>AdpRedshiftCopyActivity</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="com.krux.hyperion.objects.aws">package aws</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">AdpRedshiftCopyActivity</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="input">input: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>, <span name="insertMode">insertMode: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="output">output: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>, <span name="runsOn">runsOn: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpEc2Resource.html" class="extype" name="com.krux.hyperion.objects.aws.AdpEc2Resource">AdpEc2Resource</a>]</span>, <span name="transformSql">transformSql: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="commandOptions">commandOptions: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>, <span name="queue">queue: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="dependsOn">dependsOn: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a>]]]</span>)</span><span class="result"> extends <a href="AdpDataPipelineAbstractObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">AdpDataPipelineAbstractObject</a> with <a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>ref: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-object-redshiftcopyactivity.html
+</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>required for AdpDataPipelineObject</p></dd><dt class="param">name</dt><dd class="cmt"><p>required for AdpDataPipelineObject</p></dd><dt class="param">input</dt><dd class="cmt"><p>The input data node. The data source can be Amazon S3, DynamoDB, or Amazon Redshift.</p></dd><dt class="param">insertMode</dt><dd class="cmt"><p>Determines what AWS Data Pipeline does with pre-existing data in the target
+  table that overlaps with rows in the data to be loaded. Valid values are KEEP_EXISTING,
+  OVERWRITE_EXISTING, and TRUNCATE.</p></dd><dt class="param">output</dt><dd class="cmt"><p>The output data node. The output location can be Amazon S3 or Amazon Redshift.</p></dd><dt class="param">runsOn</dt><dd class="cmt"><p>Required for AdpActivity</p></dd><dt class="param">transformSql</dt><dd class="cmt"><p>The SQL SELECT expression used to transform the input data.</p></dd><dt class="param">commandOptions</dt><dd class="cmt"><p>Takes COPY parameters to pass to the Amazon Redshift data node.</p></dd><dt class="param">queue</dt><dd class="cmt"><p>Corresponds to the query_group setting in Amazon Redshift, which allows you to
+  assign and prioritize concurrent activities based on their placement in queues. Amazon Redshift
+  limits the number of simultaneous connections to 15.</p></dd><dt class="param">dependsOn</dt><dd class="cmt"><p>Required for AdpActivity
+</p></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a>, <a href="AdpDataPipelineObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">AdpDataPipelineObject</a>, <a href="AdpDataPipelineAbstractObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">AdpDataPipelineAbstractObject</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity"><span>AdpRedshiftCopyActivity</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="com.krux.hyperion.objects.aws.AdpActivity"><span>AdpActivity</span></li><li class="in" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject"><span>AdpDataPipelineObject</span></li><li class="in" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject"><span>AdpDataPipelineAbstractObject</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(id:String,name:Option[String],input:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode],insertMode:String,output:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode],runsOn:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpEc2Resource],transformSql:Option[String],commandOptions:Option[Seq[String]],queue:Option[String],dependsOn:Option[Seq[com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpActivity]]]):com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity"></a>
+      <a id="&lt;init&gt;:AdpRedshiftCopyActivity"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">AdpRedshiftCopyActivity</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="input">input: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>, <span name="insertMode">insertMode: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="output">output: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>, <span name="runsOn">runsOn: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpEc2Resource.html" class="extype" name="com.krux.hyperion.objects.aws.AdpEc2Resource">AdpEc2Resource</a>]</span>, <span name="transformSql">transformSql: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="commandOptions">commandOptions: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>, <span name="queue">queue: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="dependsOn">dependsOn: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a>]]]</span>)</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@&lt;init&gt;(id:String,name:Option[String],input:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode],insertMode:String,output:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode],runsOn:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpEc2Resource],transformSql:Option[String],commandOptions:Option[Seq[String]],queue:Option[String],dependsOn:Option[Seq[com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpActivity]]]):com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>required for AdpDataPipelineObject</p></dd><dt class="param">name</dt><dd class="cmt"><p>required for AdpDataPipelineObject</p></dd><dt class="param">input</dt><dd class="cmt"><p>The input data node. The data source can be Amazon S3, DynamoDB, or Amazon Redshift.</p></dd><dt class="param">insertMode</dt><dd class="cmt"><p>Determines what AWS Data Pipeline does with pre-existing data in the target
+  table that overlaps with rows in the data to be loaded. Valid values are KEEP_EXISTING,
+  OVERWRITE_EXISTING, and TRUNCATE.</p></dd><dt class="param">output</dt><dd class="cmt"><p>The output data node. The output location can be Amazon S3 or Amazon Redshift.</p></dd><dt class="param">runsOn</dt><dd class="cmt"><p>Required for AdpActivity</p></dd><dt class="param">transformSql</dt><dd class="cmt"><p>The SQL SELECT expression used to transform the input data.</p></dd><dt class="param">commandOptions</dt><dd class="cmt"><p>Takes COPY parameters to pass to the Amazon Redshift data node.</p></dd><dt class="param">queue</dt><dd class="cmt"><p>Corresponds to the query_group setting in Amazon Redshift, which allows you to
+  assign and prioritize concurrent activities based on their placement in queues. Amazon Redshift
+  limits the number of simultaneous connections to 15.</p></dd><dt class="param">dependsOn</dt><dd class="cmt"><p>Required for AdpActivity
+</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@##():Int" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@clone():Object" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#commandOptions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="commandOptions:Option[Seq[String]]"></a>
+      <a id="commandOptions:Option[Seq[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">commandOptions</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@commandOptions:Option[Seq[String]]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Takes COPY parameters to pass to the Amazon Redshift data node.</p>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#dependsOn" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dependsOn:Option[Seq[com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpActivity]]]"></a>
+      <a id="dependsOn:Option[Seq[AdpRef[AdpActivity]]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dependsOn</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a>]]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@dependsOn:Option[Seq[com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpActivity]]]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Required for AdpActivity
+</p><div class="fullcomment"><div class="comment cmt"><p>Required for AdpActivity
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity">AdpRedshiftCopyActivity</a> → <a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a></dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#id" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="id:String"></a>
+      <a id="id:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">id</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@id:String" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">required for AdpDataPipelineObject</p><div class="fullcomment"><div class="comment cmt"><p>required for AdpDataPipelineObject</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity">AdpRedshiftCopyActivity</a> → <a href="AdpDataPipelineObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">AdpDataPipelineObject</a> → <a href="AdpDataPipelineAbstractObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">AdpDataPipelineAbstractObject</a></dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#input" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="input:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode]"></a>
+      <a id="input:AdpRef[AdpDataNode]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">input</span><span class="result">: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@input:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The input data node.</p><div class="fullcomment"><div class="comment cmt"><p>The input data node. The data source can be Amazon S3, DynamoDB, or Amazon Redshift.</p></div></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#insertMode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="insertMode:String"></a>
+      <a id="insertMode:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">insertMode</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@insertMode:String" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Determines what AWS Data Pipeline does with pre-existing data in the target
+  table that overlaps with rows in the data to be loaded.</p><div class="fullcomment"><div class="comment cmt"><p>Determines what AWS Data Pipeline does with pre-existing data in the target
+  table that overlaps with rows in the data to be loaded. Valid values are KEEP_EXISTING,
+  OVERWRITE_EXISTING, and TRUNCATE.</p></div></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#name" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="name:Option[String]"></a>
+      <a id="name:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">name</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@name:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">required for AdpDataPipelineObject</p><div class="fullcomment"><div class="comment cmt"><p>required for AdpDataPipelineObject</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity">AdpRedshiftCopyActivity</a> → <a href="AdpDataPipelineObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">AdpDataPipelineObject</a> → <a href="AdpDataPipelineAbstractObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">AdpDataPipelineAbstractObject</a></dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@notify():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#output" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="output:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode]"></a>
+      <a id="output:AdpRef[AdpDataNode]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">output</span><span class="result">: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpDataNode.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataNode">AdpDataNode</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@output:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpDataNode]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The output data node.</p><div class="fullcomment"><div class="comment cmt"><p>The output data node. The output location can be Amazon S3 or Amazon Redshift.</p></div></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#queue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="queue:Option[String]"></a>
+      <a id="queue:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">queue</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@queue:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Corresponds to the query_group setting in Amazon Redshift, which allows you to
+  assign and prioritize concurrent activities based on their placement in queues.</p><div class="fullcomment"><div class="comment cmt"><p>Corresponds to the query_group setting in Amazon Redshift, which allows you to
+  assign and prioritize concurrent activities based on their placement in queues. Amazon Redshift
+  limits the number of simultaneous connections to 15.</p></div></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#runsOn" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runsOn:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpEc2Resource]"></a>
+      <a id="runsOn:AdpRef[AdpEc2Resource]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runsOn</span><span class="result">: <a href="AdpRef.html" class="extype" name="com.krux.hyperion.objects.aws.AdpRef">AdpRef</a>[<a href="AdpEc2Resource.html" class="extype" name="com.krux.hyperion.objects.aws.AdpEc2Resource">AdpEc2Resource</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@runsOn:com.krux.hyperion.objects.aws.AdpRef[com.krux.hyperion.objects.aws.AdpEc2Resource]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Required for AdpActivity</p><div class="fullcomment"><div class="comment cmt"><p>Required for AdpActivity</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity">AdpRedshiftCopyActivity</a> → <a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a></dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#transformSql" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="transformSql:Option[String]"></a>
+      <a id="transformSql:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">transformSql</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@transformSql:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The SQL SELECT expression used to transform the input data.</p>
+    </li><li name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity#type" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="type:String"></a>
+      <a id="type:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">type</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@type:String" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The type of object.</p><div class="fullcomment"><div class="comment cmt"><p>The type of object. Use one of the predefined AWS Data Pipeline object types.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity">AdpRedshiftCopyActivity</a> → <a href="AdpDataPipelineObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">AdpDataPipelineObject</a></dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@wait():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="com.krux.hyperion.objects.aws.AdpActivity">
+              <h3>Inherited from <a href="AdpActivity.html" class="extype" name="com.krux.hyperion.objects.aws.AdpActivity">AdpActivity</a></h3>
+            </div><div class="parent" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">
+              <h3>Inherited from <a href="AdpDataPipelineObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineObject">AdpDataPipelineObject</a></h3>
+            </div><div class="parent" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">
+              <h3>Inherited from <a href="AdpDataPipelineAbstractObject.html" class="extype" name="com.krux.hyperion.objects.aws.AdpDataPipelineAbstractObject">AdpDataPipelineAbstractObject</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

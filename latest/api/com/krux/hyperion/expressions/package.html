@@ -1,0 +1,282 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>expressions - com.krux.hyperion.expressions</title>
+          <meta name="description" content="expressions - com.krux.hyperion.expressions" />
+          <meta name="keywords" content="expressions com.krux.hyperion.expressions" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'com.krux.hyperion.expressions.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a href="../../../package.html" class="extype" name="com">com</a>.<a href="../../package.html" class="extype" name="com.krux">krux</a>.<a href="../package.html" class="extype" name="com.krux.hyperion">hyperion</a></p>
+        <h1>expressions</h1><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">expressions</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="com.krux.hyperion.expressions.DateTimeExp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DateTimeExpextendsExpressionwithProductwithSerializable"></a>
+      <a id="DateTimeExp:DateTimeExp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="DateTimeExp.html"><span class="name">DateTimeExp</span></a><span class="params">(<span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Expression.html" class="extype" name="com.krux.hyperion.expressions.Expression">Expression</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DateTimeExpextendsExpressionwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="com.krux.hyperion.expressions.DateTimeFunctions" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="DateTimeFunctionsextendsAnyRef"></a>
+      <a id="DateTimeFunctions:DateTimeFunctions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="DateTimeFunctions.html"><span class="name">DateTimeFunctions</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DateTimeFunctionsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This implements the aws datapipeline Date and Time Functions</p><div class="fullcomment"><div class="comment cmt"><p>This implements the aws datapipeline Date and Time Functions</p><p>ref: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-reference-functions-datetime.html
+</p></div></div>
+    </li><li name="com.krux.hyperion.expressions.DpPeriod" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DpPeriodextendsProductwithSerializable"></a>
+      <a id="DpPeriod:DpPeriod"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="DpPeriod.html"><span class="name">DpPeriod</span></a><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>, <span name="unit">unit: <a href="PeriodUnit$.html#PeriodUnit=com.krux.hyperion.expressions.PeriodUnit.Value" class="extmbr" name="com.krux.hyperion.expressions.PeriodUnit.PeriodUnit">PeriodUnit</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DpPeriodextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Indicates how often a scheduled event should run.</p><div class="fullcomment"><div class="comment cmt"><p>Indicates how often a scheduled event should run. It's expressed in the format &quot;N
+[years|months|weeks|days|hours|minutes]&quot;, where N is a positive integer value.</p><p>The minimum period is 15 minutes and the maximum period is 3 years.
+</p></div></div>
+    </li><li name="com.krux.hyperion.expressions.DpPeriodBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DpPeriodBuilderextendsAnyRef"></a>
+      <a id="DpPeriodBuilder:DpPeriodBuilder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DpPeriodBuilder.html"><span class="name">DpPeriodBuilder</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DpPeriodBuilderextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Builds DpPeriod, this is mainly used for using implicit conversions
+</p>
+    </li><li name="com.krux.hyperion.expressions.Expression" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ExpressionextendsAnyRef"></a>
+      <a id="Expression:Expression"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Expression.html"><span class="name">Expression</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@ExpressionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Expression.</p><div class="fullcomment"><div class="comment cmt"><p>Expression. Expressions are delimited by: &quot;#{&quot; and &quot;}&quot; and the contents of the braces are
+evaluated by AWS Data Pipeline.
+</p></div></div>
+    </li><li name="com.krux.hyperion.expressions.StringExp" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StringExpextendsExpressionwithProductwithSerializable"></a>
+      <a id="StringExp:StringExp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="StringExp.html"><span class="name">StringExp</span></a><span class="params">(<span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Expression.html" class="extype" name="com.krux.hyperion.expressions.Expression">Expression</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@StringExpextendsExpressionwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">For expressions that returns string.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="com.krux.hyperion.expressions.DateTimeFunctions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DateTimeFunctions"></a>
+      <a id="DateTimeFunctions:DateTimeFunctions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DateTimeFunctions$.html"><span class="name">DateTimeFunctions</span></a><span class="result"> extends <a href="DateTimeFunctions.html" class="extype" name="com.krux.hyperion.expressions.DateTimeFunctions">DateTimeFunctions</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DateTimeFunctions" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="com.krux.hyperion.expressions.DateTimeRef" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DateTimeRef"></a>
+      <a id="DateTimeRef:DateTimeRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DateTimeRef$.html"><span class="name">DateTimeRef</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@DateTimeRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">AWS DataPipeline available runtime field that references date time fields
+</p>
+    </li><li name="com.krux.hyperion.expressions.ExpressionDSL" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExpressionDSL"></a>
+      <a id="ExpressionDSL:ExpressionDSL"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExpressionDSL$.html"><span class="name">ExpressionDSL</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@ExpressionDSL" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="com.krux.hyperion.expressions.PeriodUnit" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PeriodUnit"></a>
+      <a id="PeriodUnit:PeriodUnit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="PeriodUnit$.html"><span class="name">PeriodUnit</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#com.krux.hyperion.expressions.package@PeriodUnit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">All supported data pipeline period units
+</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
