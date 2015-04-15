@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.AdpTsvDataFormat
+import com.krux.hyperion.objects.aws.{AdpTsvDataFormat, AdpRef}
 
 /**
  * TSV data format
@@ -18,10 +18,7 @@ case class TsvDataFormat private (
   def serialize = AdpTsvDataFormat(
     id = id,
     name = Some(id),
-    column = column match {
-      case Seq() => None
-      case columns => Some(columns)
-    },
+    column = column,
     escapeChar = escapeChar
   )
 

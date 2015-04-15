@@ -24,10 +24,7 @@ trait JdbcDatabase extends Database {
       connectionString = connectionString,
       jdbcDriverClass = jdbcDriverClass,
       databaseName = databaseName,
-      jdbcProperties = jdbcProperties match {
-        case Seq() => None
-        case other => Some(other)
-      },
+      jdbcProperties = jdbcProperties,
       `*password` = `*password`,
       username = username
     )

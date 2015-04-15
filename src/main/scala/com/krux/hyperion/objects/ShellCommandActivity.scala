@@ -55,42 +55,18 @@ case class ShellCommandActivity private (
     name = Some(id),
     command = command,
     scriptUri = scriptUri,
-    scriptArgument = scriptArguments match {
-      case Seq() => None
-      case arguments => Some(arguments)
-    },
-    input = input match {
-      case Seq() => None
-      case inputs => Some(inputs.map(in => AdpRef[AdpDataNode](in.id)))
-    },
-    output = output match {
-      case Seq() => None
-      case outputs => Some(outputs.map(out => AdpRef[AdpDataNode](out.id)))
-    },
+    scriptArgument = scriptArguments,
+    input = toOption(input)(in => AdpRef[AdpDataNode](in.id)),
+    output = toOption(output)(out => AdpRef[AdpDataNode](out.id)),
     stage = stage.toString(),
     stdout = stdout,
     stderr = stderr,
     runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = dependsOn match {
-      case Seq() => None
-      case deps => Some(deps.map(act => AdpRef[AdpActivity](act.id)))
-    },
-    precondition = preconditions match {
-      case Seq() => None
-      case preconditions => Some(preconditions.map(precondition => AdpRef[AdpPrecondition](precondition.id)))
-    },
-    onFail = onFailAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    },
-    onSuccess = onSuccessAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    },
-    onLateAction = onLateActionAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    }
+    dependsOn = toOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
+    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 }
 

@@ -18,10 +18,7 @@ case class CsvDataFormat private (
   def serialize = AdpCsvDataFormat(
     id = id,
     name = Some(id),
-    column = column match {
-      case Seq() => None
-      case columns => Some(columns)
-    },
+    column = column,
     escapeChar = None
   )
 

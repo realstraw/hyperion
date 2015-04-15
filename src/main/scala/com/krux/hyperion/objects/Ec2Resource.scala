@@ -48,10 +48,7 @@ case class Ec2Resource private (
       case Seq() => Some(Seq(hc.ec2SecurityGroup))
       case groups => Some(groups)
     },
-    securityGroupIds = securityGroupIds match {
-      case Seq() => None
-      case groups => Some(groups)
-    },
+    securityGroupIds = securityGroupIds,
     associatePublicIpAddress = Some(associatePublicIpAddress.toString()),
     keyPair = keyPair
   )

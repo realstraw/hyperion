@@ -30,10 +30,7 @@ case class ShellCommandPrecondition private (
     id = id,
     name = Some(id),
     command = command,
-    scriptArgument = scriptArgument match {
-      case Seq() => None
-      case arguments => Some(arguments)
-    },
+    scriptArgument = scriptArgument,
     scriptUri = scriptUri,
     stdout = stdout,
     stderr = stderr,

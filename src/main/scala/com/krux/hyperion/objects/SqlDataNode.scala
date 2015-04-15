@@ -40,18 +40,9 @@ case class SqlDataNode (
       case q: InsertTableQuery => Some(q.sql)
       case _ => None
     },
-    precondition = preconditions match {
-      case Seq() => None
-      case conditions => Some(conditions.map(precondition => AdpRef[AdpPrecondition](precondition.id)))
-    },
-    onSuccess = onSuccessAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    },
-    onFail = onFailAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    }
+    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 
 }

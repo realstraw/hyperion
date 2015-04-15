@@ -15,10 +15,7 @@ case class DynamoDBDataFormat private (
   def serialize = AdpDynamoDBDataFormat(
     id = id,
     name = Some(id),
-    column = column match {
-      case Seq() => None
-      case columns => Some(columns)
-    }
+    column = column
   )
 
 }

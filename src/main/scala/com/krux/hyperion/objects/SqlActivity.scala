@@ -37,32 +37,14 @@ case class SqlActivity private (
     name = Some(id),
     database = AdpRef[AdpDatabase](database.id),
     script = script,
-    scriptArgument = scriptArgument match {
-      case Seq() => None
-      case other => Some(other)
-    },
+    scriptArgument = scriptArgument,
     queue = queue,
     runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = dependsOn match {
-      case Seq() => None
-      case other => Some(other.map(a => AdpRef[AdpActivity](a.id)))
-    },
-    precondition = preconditions match {
-      case Seq() => None
-      case preconditions => Some(preconditions.map(precondition => AdpRef[AdpPrecondition](precondition.id)))
-    },
-    onFail = onFailAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    },
-    onSuccess = onSuccessAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    },
-    onLateAction = onLateActionAlarms match {
-      case Seq() => None
-      case alarms => Some(alarms.map(alarm => AdpRef[AdpSnsAlarm](alarm.id)))
-    }
+    dependsOn = toOption(dependsOn)(a => AdpRef[AdpActivity](a.id)),
+    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 }
 

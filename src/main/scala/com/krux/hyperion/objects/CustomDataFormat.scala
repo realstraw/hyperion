@@ -19,10 +19,7 @@ case class CustomDataFormat private (
   def serialize = AdpCustomDataFormat(
     id = id,
     name = Some(id),
-    column = column match {
-      case Seq() => None
-      case columns => Some(columns)
-    },
+    column = column,
     columnSeparator = columnSeparator,
     recordSeparator = recordSeparator
   )

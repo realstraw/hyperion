@@ -17,10 +17,7 @@ case class RegExDataFormat private (
   def serialize = AdpRegExDataFormat(
     id = id,
     name = Some(id),
-    column = column match {
-      case Seq() => None
-      case columns => Some(columns)
-    },
+    column = column,
     inputRegEx = inputRegEx,
     outputFormat = outputFormat
   )
