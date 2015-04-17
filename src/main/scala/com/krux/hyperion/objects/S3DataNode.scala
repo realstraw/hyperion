@@ -46,16 +46,16 @@ case class S3File(
 
   override def objects: Iterable[PipelineObject] = dataFormat
 
-  def serialize = AdpS3FileDataNode(
+  lazy val serialize = AdpS3FileDataNode(
     id = id,
     name = Some(id),
     compression = None,
-    dataFormat = dataFormat.map(f => AdpRef(f.id)),
+    dataFormat = dataFormat.map(f => AdpRef(f.serialize)),
     filePath = filePath,
     manifestFilePath = None,
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }
@@ -95,16 +95,16 @@ case class S3Folder(
 
   override def objects: Iterable[PipelineObject] = dataFormat
 
-  def serialize = AdpS3DirectoryDataNode(
+  lazy val serialize = AdpS3DirectoryDataNode(
     id = id,
     name = Some(id),
     compression = None,
-    dataFormat = dataFormat.map(f => AdpRef(f.id)),
+    dataFormat = dataFormat.map(f => AdpRef(f.serialize)),
     directoryPath = directoryPath,
     manifestFilePath = None,
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
   )
 }
 

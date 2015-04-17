@@ -41,7 +41,7 @@ case class DeleteS3PathActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn) ++ dependsOn ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpShellCommandActivity(
+  lazy val serialize = AdpShellCommandActivity(
     id = id,
     name = Some(id),
     command = Some(s"aws s3 rm --recursive $s3Path"),
@@ -52,12 +52,12 @@ case class DeleteS3PathActivity private (
     stage = "false",
     stdout = stdout,
     stderr = stderr,
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }

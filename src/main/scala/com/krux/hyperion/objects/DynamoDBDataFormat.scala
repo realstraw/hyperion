@@ -12,7 +12,7 @@ case class DynamoDBDataFormat private (
 
   def withColumns(cols: Seq[String]) = this.copy(column = cols)
 
-  def serialize = AdpDynamoDBDataFormat(
+  lazy val serialize = AdpDynamoDBDataFormat(
     id = id,
     name = Some(id),
     column = column

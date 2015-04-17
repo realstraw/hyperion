@@ -43,22 +43,22 @@ case class PigActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn) ++ input ++ output ++ dependsOn ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpPigActivity(
+  lazy val serialize = AdpPigActivity(
     id = id,
     name = Some(id),
     generatedScriptsPath = generatedScriptsPath,
     script = script,
     scriptUri = scriptUri,
     scriptVariable = scriptVariable,
-    input = input.map(in => AdpRef[AdpDataNode](in.id)).get,
-    output = output.map(out => AdpRef[AdpDataNode](out.id)).get,
+    input = input.map(in => AdpRef(in.serialize)).get,
+    output = output.map(out => AdpRef(out.serialize)).get,
     stage = stage.toString,
-    runsOn = AdpRef[AdpEmrCluster](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 }
 

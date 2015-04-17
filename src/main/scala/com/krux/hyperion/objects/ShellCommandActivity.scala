@@ -50,23 +50,23 @@ case class ShellCommandActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn) ++ preconditions ++ input ++ output ++ dependsOn ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpShellCommandActivity(
+  lazy val serialize = AdpShellCommandActivity(
     id = id,
     name = Some(id),
     command = command,
     scriptUri = scriptUri,
     scriptArgument = scriptArguments,
-    input = seqToOption(input)(in => AdpRef[AdpDataNode](in.id)),
-    output = seqToOption(output)(out => AdpRef[AdpDataNode](out.id)),
+    input = seqToOption(input)(in => AdpRef(in.serialize)),
+    output = seqToOption(output)(out => AdpRef(out.serialize)),
     stage = stage.toString(),
     stdout = stdout,
     stderr = stderr,
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 }
 

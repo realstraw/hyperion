@@ -44,23 +44,23 @@ case class CopyActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn, input, output) ++ dependsOn ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpCopyActivity(
+  lazy val serialize = AdpCopyActivity(
     id = id,
     name = Some(id),
     input = input match {
-      case n: S3DataNode => AdpRef[AdpS3DataNode](n.id)
-      case n: SqlDataNode => AdpRef[AdpSqlDataNode](n.id)
+      case n: S3DataNode => AdpRef(n.serialize)
+      case n: SqlDataNode => AdpRef(n.serialize)
     },
     output = output match {
-      case n: S3DataNode => AdpRef[AdpS3DataNode](n.id)
-      case n: SqlDataNode => AdpRef[AdpSqlDataNode](n.id)
+      case n: S3DataNode => AdpRef(n.serialize)
+      case n: SqlDataNode => AdpRef(n.serialize)
     },
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(x => AdpRef[AdpActivity](x.id)),
-    precondition = seqToOption(preconditions)(x => AdpRef[AdpPrecondition](x.id)),
-    onFail = seqToOption(onFailAlarms)(x => AdpRef[AdpSnsAlarm](x.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(x => AdpRef(x.serialize)),
+    precondition = seqToOption(preconditions)(x => AdpRef(x.serialize)),
+    onFail = seqToOption(onFailAlarms)(x => AdpRef(x.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 }
 

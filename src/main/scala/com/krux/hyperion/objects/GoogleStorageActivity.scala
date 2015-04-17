@@ -41,23 +41,23 @@ case class GoogleStorageDownloadActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn) ++ output ++ dependsOn ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpShellCommandActivity(
+  lazy val serialize = AdpShellCommandActivity(
     id = id,
     name = Some(id),
     command = None,
     scriptUri = Some(s"${hc.scriptUri}gsutil/gsutil_download.sh"),
     scriptArgument = Some(Seq(botoConfigUrl, input)),
     input = None,
-    output = output.map(out => Seq(AdpRef[AdpDataNode](out.id))),
+    output = output.map(out => Seq(AdpRef(out.serialize))),
     stage = "true",
     stdout = None,
     stderr = None,
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }
@@ -112,23 +112,23 @@ case class GoogleStorageUploadActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(runsOn) ++ input ++ dependsOn
 
-  def serialize = AdpShellCommandActivity(
+  lazy val serialize = AdpShellCommandActivity(
     id = id,
     name = Some(id),
     command = None,
     scriptUri = Some(s"${hc.scriptUri}gsutil/gsutil_upload.sh"),
     scriptArgument = Some(Seq(botoConfigUrl, output)),
-    input = input.map(in => Seq(AdpRef[AdpDataNode](in.id))),
+    input = input.map(in => Seq(AdpRef(in.serialize))),
     output = None,
     stage = "true",
     stdout = None,
     stderr = None,
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    runsOn = AdpRef(runsOn.serialize),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }

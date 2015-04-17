@@ -25,7 +25,7 @@ case class SqlDataNode (
   def onSuccess(alarms: SnsAlarm*) = this.copy(onSuccessAlarms = alarms)
   def onFail(alarms: SnsAlarm*) = this.copy(onFailAlarms = alarms)
 
-  def serialize = AdpSqlDataNode(
+  lazy val serialize = AdpSqlDataNode(
     id = id,
     name = Some(id),
     table = tableQuery.table,
@@ -40,9 +40,9 @@ case class SqlDataNode (
       case q: InsertTableQuery => Some(q.sql)
       case _ => None
     },
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }

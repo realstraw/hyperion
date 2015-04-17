@@ -31,7 +31,7 @@ case class SparkCluster private (
 
   def withTaskInstanceCount(n: Int) = this.copy(taskInstanceCount = n)
 
-  def serialize = AdpEmrCluster(
+  lazy val serialize = AdpEmrCluster(
     id = id,
     name = Some(id),
     bootstrapAction = bootstrapAction,

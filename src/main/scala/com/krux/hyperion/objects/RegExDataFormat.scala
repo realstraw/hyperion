@@ -14,7 +14,7 @@ case class RegExDataFormat private (
 
   def withColumns(cols: Seq[String]) = this.copy(column = cols)
 
-  def serialize = AdpRegExDataFormat(
+  lazy val serialize = AdpRegExDataFormat(
     id = id,
     name = Some(id),
     column = column,

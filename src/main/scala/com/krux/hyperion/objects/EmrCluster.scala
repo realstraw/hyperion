@@ -1,3 +1,7 @@
 package com.krux.hyperion.objects
 
-trait EmrCluster extends ResourceObject
+import com.krux.hyperion.objects.aws.AdpEmrCluster
+
+trait EmrCluster extends ResourceObject {
+  def serialize: AdpEmrCluster
+}

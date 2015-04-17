@@ -15,7 +15,7 @@ trait RedshiftDatabase extends Database {
 
   def databaseName: String
 
-  def serialize = AdpRedshiftDatabase(
+  lazy val serialize = AdpRedshiftDatabase(
       id, Some(id), clusterId, None, Some(databaseName), None, `*password`, username
     )
 

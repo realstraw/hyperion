@@ -34,7 +34,7 @@ case class SparkActivity private (
   override def objects: Iterable[PipelineObject] =
     (runsOn +: dependsOn) ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpEmrActivity(
+  lazy val serialize = AdpEmrActivity(
     id = id,
     name = Some(id),
     input = None,
@@ -44,12 +44,12 @@ case class SparkActivity private (
     actionOnResourceFailure = None,
     actionOnTaskFailure = None,
     step = steps.map(_.toStepString),
-    runsOn = AdpRef[AdpEmrCluster](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(d => AdpRef[AdpActivity](d.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(d => AdpRef(d.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 }
 

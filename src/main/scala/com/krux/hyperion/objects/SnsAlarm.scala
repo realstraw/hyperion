@@ -18,7 +18,7 @@ case class SnsAlarm private (
   def withTopicArn(topicArn: String) = this.copy(topicArn = Some(topicArn))
   def withRole(role: String) = this.copy(role = Some(role))
 
-  def serialize = new AdpSnsAlarm(
+  lazy val serialize = new AdpSnsAlarm(
     id = id,
     name = Some(id),
     subject = subject,

@@ -26,7 +26,7 @@ case class ShellCommandPrecondition private (
   implicit val hc: HyperionContext
 ) extends Precondition {
 
-  def serialize = AdpShellCommandPrecondition(
+  lazy val serialize = AdpShellCommandPrecondition(
     id = id,
     name = Some(id),
     command = command,

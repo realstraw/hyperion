@@ -29,17 +29,17 @@ case class RedshiftDataNode private (
 
   override def objects: Iterable[PipelineObject] = Some(database)
 
-  def serialize = AdpRedshiftDataNode(
+  lazy val serialize = AdpRedshiftDataNode(
     id = id,
     name = Some(id),
     createTableSql = createTableSql,
-    database = AdpRef(database.id),
+    database = AdpRef(database.serialize),
     schemaName = schemaName,
     tableName = tableName,
     primaryKeys = primaryKeys,
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }

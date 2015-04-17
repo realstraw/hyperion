@@ -38,21 +38,21 @@ case class RedshiftCopyActivity private (
 
   override def objects: Iterable[PipelineObject] = Seq(input, runsOn, output) ++ dependsOn ++ preconditions ++ onFailAlarms ++ onSuccessAlarms ++ onLateActionAlarms
 
-  def serialize = AdpRedshiftCopyActivity(
+  lazy val serialize = AdpRedshiftCopyActivity(
     id = id,
     name = Some(id),
-    input = AdpRef[AdpS3DataNode](input.id),
+    input = AdpRef(input.serialize),
     insertMode = insertMode.toString,
-    output = AdpRef[AdpRedshiftDataNode](output.id),
+    output = AdpRef(output.serialize),
     transformSql = transformSql,
     commandOptions = seqToOption(commandOptions)(_.repr).map(_.flatten),
     queue = None,
-    runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    runsOn = AdpRef(runsOn.serialize),
+    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
   )
 
 }

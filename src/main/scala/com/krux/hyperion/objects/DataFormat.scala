@@ -1,3 +1,7 @@
 package com.krux.hyperion.objects
 
-trait DataFormat extends PipelineObject
+import com.krux.hyperion.objects.aws.AdpDataFormat
+
+trait DataFormat extends PipelineObject {
+  def serialize: AdpDataFormat
+}

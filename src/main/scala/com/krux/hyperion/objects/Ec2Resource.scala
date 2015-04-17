@@ -35,7 +35,7 @@ case class Ec2Resource private (
   def withSecurityGroupIds(securityGroupIds: String*) = this.copy(securityGroupIds = securityGroupIds)
   def withPublicIp() = this.copy(associatePublicIpAddress = true)
 
-  def serialize = AdpEc2Resource(
+  lazy val serialize = AdpEc2Resource(
     id = id,
     name =Some(id),
     terminateAfter = terminateAfter,

@@ -15,7 +15,7 @@ case class TsvDataFormat private (
 
   def withEscapeChar(escapeChar: String) = this.copy(escapeChar = Option(escapeChar))
 
-  def serialize = AdpTsvDataFormat(
+  lazy val serialize = AdpTsvDataFormat(
     id = id,
     name = Some(id),
     column = column,

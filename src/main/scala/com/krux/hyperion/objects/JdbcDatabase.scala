@@ -18,7 +18,7 @@ trait JdbcDatabase extends Database {
 
   def jdbcProperties: Seq[String] = Seq()
 
-  def serialize = AdpJdbcDatabase(
+  lazy val serialize = AdpJdbcDatabase(
       id = id,
       name = Some(id),
       connectionString = connectionString,

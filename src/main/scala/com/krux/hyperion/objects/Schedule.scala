@@ -47,7 +47,7 @@ case class Schedule(
   def until(dt: DateTime) = this.copy(end = Some(Right(dt)))
   def stopAfter(occurrences: Int) = this.copy(end = Some(Left(occurrences)))
 
-  def serialize = start match {
+  lazy val serialize: AdpSchedule = start match {
     case Some(dt) =>
       AdpSchedule(
         id = id,
