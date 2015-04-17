@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpTsvDataFormat, AdpRef}
+import com.krux.hyperion.objects.aws.AdpTsvDataFormat
 
 /**
  * TSV data format

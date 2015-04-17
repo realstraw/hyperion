@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.AdpDataNode
+import com.krux.hyperion.objects.aws.{AdpDataNode, AdpRef}
 
 trait DataNode extends PipelineObject {
 
@@ -16,4 +16,5 @@ trait DataNode extends PipelineObject {
   def onFail(alarms: SnsAlarm*): DataNode
 
   def serialize: AdpDataNode
+  def ref: AdpRef[AdpDataNode] = AdpRef(serialize)
 }

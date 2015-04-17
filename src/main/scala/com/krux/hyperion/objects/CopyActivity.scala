@@ -1,8 +1,7 @@
 package com.krux.hyperion.objects
 
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.objects.aws.{AdpCopyActivity, AdpDataNode, AdpRef, AdpEc2Resource,
-  AdpActivity, AdpS3DataNode, AdpSqlDataNode, AdpSnsAlarm, AdpPrecondition}
+import com.krux.hyperion.objects.aws.AdpCopyActivity
 
 
 /**
@@ -48,19 +47,19 @@ case class CopyActivity private (
     id = id,
     name = Some(id),
     input = input match {
-      case n: S3DataNode => AdpRef(n.serialize)
-      case n: SqlDataNode => AdpRef(n.serialize)
+      case n: S3DataNode => n.ref
+      case n: SqlDataNode => n.ref
     },
     output = output match {
-      case n: S3DataNode => AdpRef(n.serialize)
-      case n: SqlDataNode => AdpRef(n.serialize)
+      case n: S3DataNode => n.ref
+      case n: SqlDataNode => n.ref
     },
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(x => AdpRef(x.serialize)),
-    precondition = seqToOption(preconditions)(x => AdpRef(x.serialize)),
-    onFail = seqToOption(onFailAlarms)(x => AdpRef(x.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 }
 

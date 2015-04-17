@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import aws.{AdpS3FileDataNode, AdpS3DirectoryDataNode, AdpJsonSerializer, AdpRef, AdpPrecondition, AdpSnsAlarm}
+import aws.{AdpS3FileDataNode, AdpS3DirectoryDataNode}
 
 trait S3DataNode extends Copyable {
 
@@ -50,12 +50,12 @@ case class S3File(
     id = id,
     name = Some(id),
     compression = None,
-    dataFormat = dataFormat.map(f => AdpRef(f.serialize)),
+    dataFormat = dataFormat.map(_.ref),
     filePath = filePath,
     manifestFilePath = None,
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
+    precondition = seqToOption(preconditions)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref)
   )
 
 }
@@ -99,12 +99,12 @@ case class S3Folder(
     id = id,
     name = Some(id),
     compression = None,
-    dataFormat = dataFormat.map(f => AdpRef(f.serialize)),
+    dataFormat = dataFormat.map(_.ref),
     directoryPath = directoryPath,
     manifestFilePath = None,
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
+    precondition = seqToOption(preconditions)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref)
   )
 }
 

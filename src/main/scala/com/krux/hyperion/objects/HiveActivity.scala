@@ -1,8 +1,7 @@
 package com.krux.hyperion.objects
 
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.objects.aws.{AdpHiveActivity, AdpDataNode, AdpRef, AdpEmrCluster, AdpActivity, AdpPrecondition}
-import com.krux.hyperion.objects.aws.AdpSnsAlarm
+import com.krux.hyperion.objects.aws.AdpHiveActivity
 
 case class HiveActivity private (
   id: PipelineObjectId,
@@ -47,15 +46,15 @@ case class HiveActivity private (
     hiveScript = hiveScript,
     scriptUri = scriptUri,
     scriptVariable = scriptVariable,
-    input = input.map(in => AdpRef(in.serialize)).get,
-    output = output.map(out => AdpRef(out.serialize)).get,
+    input = input.map(_.ref).get,
+    output = output.map(_.ref).get,
     stage = stage.toString,
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 }
 

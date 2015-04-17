@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.AdpActivity
+import com.krux.hyperion.objects.aws.{AdpActivity, AdpRef}
 
 trait PipelineActivity extends PipelineObject {
 
@@ -15,5 +15,6 @@ trait PipelineActivity extends PipelineObject {
   def onLateAction(alarms: SnsAlarm*): PipelineActivity
 
   def serialize: AdpActivity
+  def ref: AdpRef[AdpActivity] = AdpRef(serialize)
 
 }

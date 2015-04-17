@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import aws.{AdpEc2Resource, AdpJsonSerializer}
+import com.krux.hyperion.objects.aws.{AdpEc2Resource, AdpRef}
 import com.krux.hyperion.HyperionContext
 
 /**
@@ -52,6 +52,8 @@ case class Ec2Resource private (
     associatePublicIpAddress = Some(associatePublicIpAddress.toString()),
     keyPair = keyPair
   )
+
+  def ref: AdpRef[AdpEc2Resource] = AdpRef(serialize)
 }
 
 object Ec2Resource {

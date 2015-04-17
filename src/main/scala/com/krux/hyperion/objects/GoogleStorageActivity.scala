@@ -1,9 +1,7 @@
 package com.krux.hyperion.objects
 
-import aws.{AdpJsonSerializer, AdpShellCommandActivity, AdpRef,
-  AdpDataNode, AdpActivity, AdpEc2Resource, AdpPrecondition}
+import com.krux.hyperion.objects.aws.AdpShellCommandActivity
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.objects.aws.AdpSnsAlarm
 
 trait GoogleStorageActivity extends PipelineActivity
 
@@ -48,16 +46,16 @@ case class GoogleStorageDownloadActivity private (
     scriptUri = Some(s"${hc.scriptUri}gsutil/gsutil_download.sh"),
     scriptArgument = Some(Seq(botoConfigUrl, input)),
     input = None,
-    output = output.map(out => Seq(AdpRef(out.serialize))),
+    output = output.map(out => Seq(out.ref)),
     stage = "true",
     stdout = None,
     stderr = None,
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 
 }
@@ -118,17 +116,17 @@ case class GoogleStorageUploadActivity private (
     command = None,
     scriptUri = Some(s"${hc.scriptUri}gsutil/gsutil_upload.sh"),
     scriptArgument = Some(Seq(botoConfigUrl, output)),
-    input = input.map(in => Seq(AdpRef(in.serialize))),
+    input = input.map(in => Seq(in.ref)),
     output = None,
     stage = "true",
     stdout = None,
     stderr = None,
-    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
-    runsOn = AdpRef(runsOn.serialize),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    runsOn = runsOn.ref,
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 
 }

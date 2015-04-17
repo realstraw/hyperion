@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpRedshiftDataNode, AdpJsonSerializer, AdpRef, AdpPrecondition, AdpSnsAlarm}
+import com.krux.hyperion.objects.aws.AdpRedshiftDataNode
 
 /**
  * The abstracted RedshiftDataNode
@@ -33,13 +33,13 @@ case class RedshiftDataNode private (
     id = id,
     name = Some(id),
     createTableSql = createTableSql,
-    database = AdpRef(database.serialize),
+    database = database.ref,
     schemaName = schemaName,
     tableName = tableName,
     primaryKeys = primaryKeys,
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
+    precondition = seqToOption(preconditions)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref)
   )
 
 }

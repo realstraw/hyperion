@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpSqlDataNode, AdpPrecondition, AdpSnsAlarm, AdpRef}
+import com.krux.hyperion.objects.aws.AdpSqlDataNode
 import com.krux.hyperion.objects.sql.{TableQuery, SelectTableQuery, InsertTableQuery}
 
 /**
@@ -40,9 +40,9 @@ case class SqlDataNode (
       case q: InsertTableQuery => Some(q.sql)
       case _ => None
     },
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize))
+    precondition = seqToOption(preconditions)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref)
   )
 
 }

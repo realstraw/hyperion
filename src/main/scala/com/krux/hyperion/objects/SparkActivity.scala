@@ -1,8 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpEmrActivity, AdpJsonSerializer, AdpRef, AdpEmrCluster,
-  AdpActivity, AdpPrecondition}
-import com.krux.hyperion.objects.aws.AdpSnsAlarm
+import com.krux.hyperion.objects.aws.AdpEmrActivity
 
 /**
  * Defines a spark activity
@@ -44,12 +42,12 @@ case class SparkActivity private (
     actionOnResourceFailure = None,
     actionOnTaskFailure = None,
     step = steps.map(_.toStepString),
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(d => AdpRef(d.serialize)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 }
 

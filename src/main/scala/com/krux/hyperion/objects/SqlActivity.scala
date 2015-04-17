@@ -1,7 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpSqlActivity, AdpEc2Resource, AdpRef, AdpDatabase,
-  AdpActivity, AdpSnsAlarm, AdpPrecondition}
+import com.krux.hyperion.objects.aws.AdpSqlActivity
 
 case class SqlActivity private (
   id: PipelineObjectId,
@@ -35,16 +34,16 @@ case class SqlActivity private (
   lazy val serialize = AdpSqlActivity(
     id = id,
     name = Some(id),
-    database = AdpRef(database.serialize),
+    database = database.ref,
     script = script,
     scriptArgument = scriptArgument,
     queue = queue,
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(a => AdpRef(a.serialize)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 }
 

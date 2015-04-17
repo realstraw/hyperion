@@ -17,6 +17,7 @@ trait PipelineObject {
   def id: PipelineObjectId
   def objects: Iterable[PipelineObject] = None
   def serialize: AdpDataPipelineAbstractObject
+  def ref: AdpRef[AdpDataPipelineAbstractObject]
 
   def seqToOption[A, B](anySeq: Seq[A])(transform: A => B) = {
     anySeq match {

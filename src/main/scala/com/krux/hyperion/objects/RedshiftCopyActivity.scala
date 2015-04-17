@@ -1,8 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpRedshiftCopyActivity, AdpRef, AdpJsonSerializer,
-  AdpActivity, AdpS3DataNode, AdpRedshiftDataNode, AdpEc2Resource, AdpPrecondition}
-import com.krux.hyperion.objects.aws.AdpSnsAlarm
+import com.krux.hyperion.objects.aws.AdpRedshiftCopyActivity
 
 /**
  * Redshift copy activity
@@ -41,18 +39,18 @@ case class RedshiftCopyActivity private (
   lazy val serialize = AdpRedshiftCopyActivity(
     id = id,
     name = Some(id),
-    input = AdpRef(input.serialize),
+    input = input.ref,
     insertMode = insertMode.toString,
-    output = AdpRef(output.serialize),
+    output = output.ref,
     transformSql = transformSql,
     commandOptions = seqToOption(commandOptions)(_.repr).map(_.flatten),
     queue = None,
-    runsOn = AdpRef(runsOn.serialize),
-    dependsOn = seqToOption(dependsOn)(act => AdpRef(act.serialize)),
-    precondition = seqToOption(preconditions)(precondition => AdpRef(precondition.serialize)),
-    onFail = seqToOption(onFailAlarms)(alarm => AdpRef(alarm.serialize)),
-    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef(alarm.serialize)),
-    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef(alarm.serialize))
+    runsOn = runsOn.ref,
+    dependsOn = seqToOption(dependsOn)(_.ref),
+    precondition = seqToOption(preconditions)(_.ref),
+    onFail = seqToOption(onFailAlarms)(_.ref),
+    onSuccess = seqToOption(onSuccessAlarms)(_.ref),
+    onLateAction = seqToOption(onLateActionAlarms)(_.ref)
   )
 
 }

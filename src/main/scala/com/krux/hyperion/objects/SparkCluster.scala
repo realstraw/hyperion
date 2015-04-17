@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.{AdpEmrCluster, AdpJsonSerializer}
+import com.krux.hyperion.objects.aws.AdpEmrCluster
 import com.krux.hyperion.HyperionContext
 
 /**

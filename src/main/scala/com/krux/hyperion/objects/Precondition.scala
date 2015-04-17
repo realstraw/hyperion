@@ -1,6 +1,6 @@
 package com.krux.hyperion.objects
 
-import com.krux.hyperion.objects.aws.AdpPrecondition
+import com.krux.hyperion.objects.aws.{AdpPrecondition, AdpRef}
 
 /**
  * A condition that must be met before the object can run.
@@ -19,5 +19,7 @@ trait Precondition extends PipelineObject {
   def role: Option[String]
 
   def serialize: AdpPrecondition
+
+  def ref: AdpRef[AdpPrecondition] = AdpRef(serialize)
 
 }

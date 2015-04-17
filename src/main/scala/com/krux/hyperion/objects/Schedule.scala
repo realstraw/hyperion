@@ -3,7 +3,7 @@ package com.krux.hyperion.objects
 import com.github.nscala_time.time.Imports.{DateTime, DateTimeZone}
 import com.krux.hyperion.expressions.DpPeriod
 import com.krux.hyperion.Implicits._
-import com.krux.hyperion.objects.aws.AdpSchedule
+import com.krux.hyperion.objects.aws.{AdpSchedule, AdpRef}
 import com.krux.hyperion.objects.ScheduleType._
 
 /**
@@ -82,6 +82,8 @@ case class Schedule(
         }
       )
   }
+
+  def ref: AdpRef[AdpSchedule] = AdpRef(serialize)
 
 }
 
