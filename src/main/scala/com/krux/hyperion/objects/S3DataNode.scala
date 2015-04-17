@@ -53,9 +53,9 @@ case class S3File(
     dataFormat = dataFormat.map(f => AdpRef(f.id)),
     filePath = filePath,
     manifestFilePath = None,
-    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 
 }
@@ -102,9 +102,9 @@ case class S3Folder(
     dataFormat = dataFormat.map(f => AdpRef(f.id)),
     directoryPath = directoryPath,
     manifestFilePath = None,
-    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 }
 

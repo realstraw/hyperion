@@ -12,13 +12,13 @@ import scala.language.implicitConversions
 trait PipelineObject {
 
   implicit def uniquePipelineId2String(id: PipelineObjectId): String = id.toString
-  implicit def seq2Option[A](anySeq: Seq[A]): Option[Seq[A]] = toOption(anySeq)(x => x)
+  implicit def seq2Option[A](anySeq: Seq[A]): Option[Seq[A]] = seqToOption(anySeq)(x => x)
 
   def id: PipelineObjectId
   def objects: Iterable[PipelineObject] = None
   def serialize: AdpDataPipelineAbstractObject
 
-  def toOption[A, B](anySeq: Seq[A])(transform: A => B) = {
+  def seqToOption[A, B](anySeq: Seq[A])(transform: A => B) = {
     anySeq match {
       case Seq() => None
       case other => Some(anySeq.map(transform))

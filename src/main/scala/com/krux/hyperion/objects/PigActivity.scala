@@ -54,11 +54,11 @@ case class PigActivity private (
     output = output.map(out => AdpRef[AdpDataNode](out.id)).get,
     stage = stage.toString,
     runsOn = AdpRef[AdpEmrCluster](runsOn.id),
-    dependsOn = toOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 }
 

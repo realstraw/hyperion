@@ -55,17 +55,17 @@ case class JarActivity private (
     command = None,
     scriptUri = Some(s"${hc.scriptUri}run-jar.sh"),
     scriptArgument = Some(jar.toSeq ++ mainClass.toSeq ++ arguments),
-    input = toOption(input)(in => AdpRef[AdpDataNode](in.id)),
-    output = toOption(output)(out => AdpRef[AdpDataNode](out.id)),
+    input = seqToOption(input)(in => AdpRef[AdpDataNode](in.id)),
+    output = seqToOption(output)(out => AdpRef[AdpDataNode](out.id)),
     stage = "true",
     stdout = stdout,
     stderr = stderr,
     runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = toOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 
 }

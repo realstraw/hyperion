@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.6.0 - 2015-04-05
 ### Changed
-- #17 - Make pipline id transaprent
+- #17 - Make pipline id transparent
 - #35 - Use immutable Map for objects building
 
 ## 1.5.1 - 2015-04-02

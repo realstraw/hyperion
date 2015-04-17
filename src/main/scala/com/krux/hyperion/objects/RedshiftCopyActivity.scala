@@ -45,14 +45,14 @@ case class RedshiftCopyActivity private (
     insertMode = insertMode.toString,
     output = AdpRef[AdpRedshiftDataNode](output.id),
     transformSql = transformSql,
-    commandOptions = toOption(commandOptions)(_.repr).map(_.flatten),
+    commandOptions = seqToOption(commandOptions)(_.repr).map(_.flatten),
     queue = None,
     runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = toOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
-    precondition = toOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
-    onFail = toOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    dependsOn = seqToOption(dependsOn)(act => AdpRef[AdpActivity](act.id)),
+    precondition = seqToOption(preconditions)(precondition => AdpRef[AdpPrecondition](precondition.id)),
+    onFail = seqToOption(onFailAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 
 }

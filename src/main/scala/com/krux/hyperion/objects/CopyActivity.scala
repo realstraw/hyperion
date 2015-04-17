@@ -56,11 +56,11 @@ case class CopyActivity private (
       case n: SqlDataNode => AdpRef[AdpSqlDataNode](n.id)
     },
     runsOn = AdpRef[AdpEc2Resource](runsOn.id),
-    dependsOn = toOption(dependsOn)(x => AdpRef[AdpActivity](x.id)),
-    precondition = toOption(preconditions)(x => AdpRef[AdpPrecondition](x.id)),
-    onFail = toOption(onFailAlarms)(x => AdpRef[AdpSnsAlarm](x.id)),
-    onSuccess = toOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
-    onLateAction = toOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
+    dependsOn = seqToOption(dependsOn)(x => AdpRef[AdpActivity](x.id)),
+    precondition = seqToOption(preconditions)(x => AdpRef[AdpPrecondition](x.id)),
+    onFail = seqToOption(onFailAlarms)(x => AdpRef[AdpSnsAlarm](x.id)),
+    onSuccess = seqToOption(onSuccessAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id)),
+    onLateAction = seqToOption(onLateActionAlarms)(alarm => AdpRef[AdpSnsAlarm](alarm.id))
   )
 }
 
