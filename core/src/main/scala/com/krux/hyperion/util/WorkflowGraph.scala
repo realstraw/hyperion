@@ -1,4 +1,4 @@
-package com.krux.hyperion
+package com.krux.hyperion.util
 
 import com.krux.hyperion.activity.PipelineActivity
 import com.krux.hyperion.common.PipelineObjectId
@@ -6,9 +6,9 @@ import scala.collection.mutable.Buffer
 import scala.language.implicitConversions
 
 class WorkflowGraph private (
-  flow: Map[PipelineObjectId, Set[PipelineObjectId]],
-  activities: Map[PipelineObjectId, PipelineActivity],
-  roots: Set[PipelineObjectId]
+  val flow: Map[PipelineObjectId, Set[PipelineObjectId]],
+  val activities: Map[PipelineObjectId, PipelineActivity],
+  val roots: Set[PipelineObjectId]
 ) {
 
   def this() =
@@ -25,7 +25,12 @@ class WorkflowGraph private (
       case Some(acts) => acts + act2.id
       case None => Set(act2.id)
     }
-    val newRoots = roots - act2.id
+
+    val newRoots = if (activities.contains(act1.id)) {
+        roots - act2.id
+      } else {
+        roots - act2.id + act1.id
+      }
 
     val newActivities = activities + (act1.id -> act1) + (act2.id -> act2)
 
@@ -34,19 +39,19 @@ class WorkflowGraph private (
 
   def toActivities: Iterable[PipelineActivity] = {
 
-    val newFlow = flow -- roots
+    assert(roots.size != 0)
 
-    if (newFlow.size == 0) {
+    if (flow.size == 0) {
       activities.values
     } else {
 
       // get the immediate dependencies from the root node
-      val dependencies: Set[(PipelineObjectId, PipelineObjectId)] =
+      val rootDependents: Set[(PipelineObjectId, PipelineObjectId)] =
         for { act <- roots; dependent <- flow(act) } yield {
           (dependent, act)
         }
 
-      val actsWithDeps = dependencies.groupBy(_._1)
+      val actsWithDeps = rootDependents.groupBy(_._1)
         .map { case (dependent, group) =>
           dependent.dependsOn(group.map(_._2).toSeq.map(activities): _*)
         }
@@ -57,7 +62,7 @@ class WorkflowGraph private (
 
       val newRoots = actsWithDeps.map(_.id).toSet
 
-      roots.map(activities) ++ (new WorkflowGraph(newFlow, newActivities, newRoots)).toActivities
+      roots.map(activities) ++ (new WorkflowGraph(flow -- roots, newActivities, newRoots)).toActivities
     }
   }
 

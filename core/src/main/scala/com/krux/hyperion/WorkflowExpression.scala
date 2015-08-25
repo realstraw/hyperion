@@ -3,6 +3,7 @@ package com.krux.hyperion
 import scala.language.implicitConversions
 
 import com.krux.hyperion.activity.PipelineActivity
+import com.krux.hyperion.util.WorkflowGraph
 
 sealed abstract class WorkflowExpression {
 
