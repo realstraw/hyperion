@@ -46,9 +46,9 @@ class WorkflowExpressionSpec extends WordSpec {
             val dependeeIds = act.dependsOn.map(_.id.toString.take(4)).toSet
             assert(dependeeIds === Set("act1", "act2"))
           case "act6" =>
-            assert(act.dependsOn.size === 5)
+            assert(act.dependsOn.size === 2)
             val dependeeIds = act.dependsOn.map(_.id.toString.take(4)).toSet
-            assert(dependeeIds === Set("act1", "act2", "act3", "act4", "act5"))
+            assert(dependeeIds === Set("act4", "act5"))
           case _ =>
             // this should never get executed
             assert(true === false)
@@ -75,13 +75,13 @@ class WorkflowExpressionSpec extends WordSpec {
             val dependeeIds = act.dependsOn.map(_.id.toString.take(4)).toSet
             assert(dependeeIds === Set("act1"))
           case "act3" =>
-            assert(act.dependsOn.size === 2)
+            assert(act.dependsOn.size === 1)
             val dependeeIds = act.dependsOn.map(_.id.toString.take(4)).toSet
-            assert(dependeeIds === Set("act1", "act2"))
+            assert(dependeeIds === Set("act2"))
           case "act4" =>
-            assert(act.dependsOn.size === 3)
+            assert(act.dependsOn.size === 1)
             val dependeeIds = act.dependsOn.map(_.id.toString.take(4)).toSet
-            assert(dependeeIds === Set("act1", "act2", "act3"))
+            assert(dependeeIds === Set("act3"))
           case _ =>
             // this should never get executed
             assert(true === false)

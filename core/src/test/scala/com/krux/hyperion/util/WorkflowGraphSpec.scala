@@ -16,6 +16,7 @@ class WorkflowGraphSpec extends WordSpec {
     val ec2 = Ec2Resource()
 
     "produce correct dependencies" in {
+
       val act1 = ShellCommandActivity("run act1")(ec2).named("act1")
       val act2 = ShellCommandActivity("run act2")(ec2).named("act2")
       val act3 = ShellCommandActivity("run act3")(ec2).named("act3")
@@ -66,8 +67,6 @@ class WorkflowGraphSpec extends WordSpec {
           case _ => assert(true === false)  // should never happen
         }
       }
-
     }
   }
-
 }
