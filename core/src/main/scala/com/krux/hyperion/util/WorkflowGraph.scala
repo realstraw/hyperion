@@ -9,8 +9,9 @@ import scala.annotation.tailrec
 class WorkflowGraph private (
   val flow: Map[PipelineObjectId, Set[PipelineObjectId]],
   val activities: Map[PipelineObjectId, PipelineActivity]
-  // val roots: Set[PipelineObjectId]
 ) {
+
+  type Flow = Map[PipelineObjectId, Set[PipelineObjectId]]
 
   def this() =
     this(
@@ -83,10 +84,7 @@ class WorkflowGraph private (
     new WorkflowGraph(newFlow, newActivities)
   }
 
-  private def mergeFlow(
-    flow1: Map[PipelineObjectId, Set[PipelineObjectId]],
-    flow2: Map[PipelineObjectId, Set[PipelineObjectId]]
-  ): Map[PipelineObjectId, Set[PipelineObjectId]] =
+  private def mergeFlow(flow1: Flow, flow2: Flow): Flow =
     flow2.foldLeft(flow1) { case (f, (act, dependents)) =>
       val newDependents = f.get(act) match {
         case Some(ds) => ds ++ dependents
@@ -107,7 +105,10 @@ class WorkflowGraph private (
     } else {
       // get the immediate dependencies from the root node
       val rootDependents: Set[(PipelineObjectId, PipelineObjectId)] =
-        for { act <- (roots -- isolates); dependent <- flow(act) } yield (dependent, act)
+        for {
+          act <- (roots -- isolates)
+          dependent <- flow(act)
+        } yield (dependent, act)
 
       // assign dependees to the immediate dependents
       val actsWithDeps = rootDependents.groupBy(_._1)
