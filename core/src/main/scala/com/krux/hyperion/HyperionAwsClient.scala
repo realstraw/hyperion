@@ -2,6 +2,7 @@ package com.krux.hyperion
 
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
+
 import com.amazonaws.auth.{DefaultAWSCredentialsProviderChain, STSAssumeRoleSessionCredentialsProvider}
 import com.amazonaws.regions.{Regions, Region}
 import com.amazonaws.services.datapipeline._

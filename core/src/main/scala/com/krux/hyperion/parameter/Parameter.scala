@@ -7,6 +7,7 @@ import com.krux.hyperion.common.S3Uri
 import com.krux.hyperion.aws.AdpParameter
 
 trait Parameter[T] {
+
   def id: String
   def description: Option[String]
   def isEncrypted: Boolean

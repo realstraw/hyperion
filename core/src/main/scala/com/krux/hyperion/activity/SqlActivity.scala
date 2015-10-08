@@ -10,7 +10,7 @@ import com.krux.hyperion.precondition.Precondition
 import com.krux.hyperion.resource.{Resource, Ec2Resource}
 
 /**
- * Runs an SQL query on a RedShift cluster. If the query writes out to a table that does not exist,
+ * Runs an SQL query on a database. If the query writes out to a table that does not exist,
  * a new table with that name is created.
  */
 case class SqlActivity private (

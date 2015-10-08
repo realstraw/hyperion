@@ -1,18 +1,17 @@
 package com.krux.hyperion
 
-import com.krux.hyperion.activity.MainClass
-import com.krux.hyperion.aws.{AdpParameterSerializer, AdpPipelineSerializer, AdpJsonSerializer}
-import com.krux.hyperion.common.{S3UriHelper, S3Uri, DefaultObject, PipelineObject}
-import com.krux.hyperion.parameter.Parameter
-import com.krux.hyperion.workflow.WorkflowExpressionImplicits
-
 import scala.language.implicitConversions
-
-import org.json4s.JsonDSL._
-import org.json4s.{JValue, JArray}
 
 import com.amazonaws.services.datapipeline.model.{ParameterObject => AwsParameterObject}
 import com.amazonaws.services.datapipeline.model.{PipelineObject => AwsPipelineObject}
+import org.json4s.JsonDSL._
+import org.json4s.{JValue, JArray}
+
+import com.krux.hyperion.activity.MainClass
+import com.krux.hyperion.aws.{AdpDataPipelineAbstractObject, AdpParameterSerializer, AdpPipelineSerializer, AdpJsonSerializer}
+import com.krux.hyperion.common.{S3UriHelper, S3Uri, DefaultObject, PipelineObject}
+import com.krux.hyperion.parameter.Parameter
+import com.krux.hyperion.workflow.WorkflowExpressionImplicits
 
 /**
  * Base trait of all data pipeline definitions. All data pipelines needs to implement this trait
@@ -35,7 +34,7 @@ trait DataPipelineDef extends HyperionCli with S3UriHelper with WorkflowExpressi
 
   def objects: Iterable[PipelineObject] = workflow
     .toPipelineObjects
-    .foldLeft(Map[String, PipelineObject]())(flattenPipelineObjects)
+    .foldLeft(Map.empty[String, PipelineObject])(flattenPipelineObjects)
     .values
 
   private def flattenPipelineObjects(r: Map[String, PipelineObject], po: PipelineObject): Map[String, PipelineObject] =
@@ -46,6 +45,32 @@ trait DataPipelineDef extends HyperionCli with S3UriHelper with WorkflowExpressi
     }
 
   def pipelineName = MainClass(this).toString
+
+  def withNewParameterValues(moreParams: Iterable[(String, String)]): DataPipelineDef = {
+    val paramMap = parameters.map(p => p.id -> p).toMap[String, Parameter[_]]
+
+    moreParams.foldLeft(paramMap) { case (m, (pid, pvalue)) =>
+      val previousParam = paramMap(pid)
+      m + ((pid, previousParam.withValue(pvalue)))
+    }
+    ???
+  }
+
+  /**
+   * Overwrites the defined parameters in this pipeline.
+   */
+  def overwriteParameters(moreParams: Iterable[Parameter[_]]): DataPipelineDef = {
+    val bldr = Map.newBuilder[String, Parameter[_]] ++=
+      parameters.map(p => p.id -> p) ++=
+      moreParams.map(p => p.id -> p)
+
+    MinimalDataPipelineDef(
+      this.pipelineName,
+      this.schedule,
+      this.workflow,
+      bldr.result.values
+    )
+  }
 
 }
 
@@ -66,4 +91,5 @@ object DataPipelineDef {
 
   implicit def dataPipelineDef2AwsParameter(pd: DataPipelineDef): Seq[AwsParameterObject] =
     pd.parameters.flatMap(_.serialize).map(o => AdpParameterSerializer(o)).toList
+
 }
